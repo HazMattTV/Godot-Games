@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://l0wq6djnucim"]
+
+[ext_resource type="Script" path="res://scripts/planet.gd" id="1_hnd1c"]
+
+[node name="Planet" type="CSGSphere3D"]
+radius = 13.6285
+radial_segments = 100
+rings = 100
+script = ExtResource("1_hnd1c")
+
+[node name="head" type="Node3D" parent="."]
+
+[node name="camera" type="Camera3D" parent="head"]
+transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 64.5909, 0, 0)

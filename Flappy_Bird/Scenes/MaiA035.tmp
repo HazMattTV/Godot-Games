@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://rlwjy0sf2nrw"]
+
+[ext_resource type="Texture2D" uid="uid://c4u1thrq26ilv" path="res://Assets/Sprites/Backgrounds (288x512).png" id="1_sjeas"]
+[ext_resource type="PackedScene" uid="uid://b04l0ip8ycegy" path="res://Objects/base.tscn" id="2_pfcev"]
+[ext_resource type="PackedScene" uid="uid://d2k8hu7cdvywe" path="res://Objects/pause_button.tscn" id="3_06ioj"]
+[ext_resource type="PackedScene" uid="uid://bsvalcbvtt48c" path="res://Objects/player.tscn" id="4_ubage"]
+
+[node name="MainScene" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(148, 256)
+scale = Vector2(1.02778, 1)
+texture = ExtResource("1_sjeas")
+region_enabled = true
+region_rect = Rect2(0, 0, 288, 512)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(147, 256)
+zoom = Vector2(2, 2)
+
+[node name="Base" parent="." instance=ExtResource("2_pfcev")]
+position = Vector2(149, 460)
+
+[node name="pause_button" parent="." instance=ExtResource("3_06ioj")]
+offset_left = 13.0
+offset_top = 18.0
+offset_bottom = 47.0
+
+[node name="Player" parent="." instance=ExtResource("4_ubage")]
+position = Vector2(50, 218)

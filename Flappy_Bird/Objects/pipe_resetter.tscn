@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dj4w7nhpqisas"]
+
+[ext_resource type="Script" path="res://Scripts/pipe_resetter.gd" id="1_pqnrw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7g20"]
+size = Vector2(20, 622)
+
+[node name="Pipe Resetter" type="Area2D" groups=["resetter"]]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_pqnrw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 301)
+shape = SubResource("RectangleShape2D_h7g20")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,110 @@
+[gd_scene load_steps=14 format=3 uid="uid://rlwjy0sf2nrw"]
+
+[ext_resource type="Texture2D" uid="uid://c4u1thrq26ilv" path="res://Assets/Sprites/Backgrounds (288x512).png" id="1_2kly1"]
+[ext_resource type="PackedScene" uid="uid://b04l0ip8ycegy" path="res://Objects/base.tscn" id="2_deonk"]
+[ext_resource type="PackedScene" uid="uid://bsvalcbvtt48c" path="res://Objects/player.tscn" id="3_sugvb"]
+[ext_resource type="PackedScene" uid="uid://d2k8hu7cdvywe" path="res://Objects/pause_button.tscn" id="4_nyogn"]
+[ext_resource type="PackedScene" uid="uid://dj4w7nhpqisas" path="res://Objects/pipe_resetter.tscn" id="5_1viix"]
+[ext_resource type="PackedScene" uid="uid://cyvxduqsaha4v" path="res://Objects/Get_Reeady.tscn" id="5_ed5yu"]
+[ext_resource type="Script" path="res://Scripts/UI/Score.gd" id="6_ecff1"]
+[ext_resource type="PackedScene" uid="uid://8of14r5p4y7u" path="res://Objects/game_over_screen.tscn" id="6_mbe4g"]
+[ext_resource type="PackedScene" uid="uid://b3p8a6g4227vd" path="res://Objects/pipes.tscn" id="7_q5oly"]
+[ext_resource type="PackedScene" uid="uid://d25k00fmkmyk6" path="res://Objects/wall.tscn" id="9_lwdpj"]
+[ext_resource type="FontFile" uid="uid://ulff638hxxc4" path="res://Assets/Sprites/Number_Font(24x36).png" id="10_xgqio"]
+[ext_resource type="PackedScene" uid="uid://sfomgvhaoavd" path="res://Objects/base_resetter.tscn" id="12_1fmfe"]
+[ext_resource type="PackedScene" uid="uid://us0j7i821rlr" path="res://Objects/death_flash.tscn" id="13_0fd3l"]
+
+[node name="MainScene" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(148, 249)
+scale = Vector2(1.02778, 1.12109)
+texture = ExtResource("1_2kly1")
+region_enabled = true
+region_rect = Rect2(0, 0, 288, 512)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(147, 256)
+zoom = Vector2(2, 2)
+
+[node name="Player" parent="." instance=ExtResource("3_sugvb")]
+position = Vector2(50, 210)
+x = 50
+y = 210
+
+[node name="pipes" parent="." instance=ExtResource("7_q5oly")]
+position = Vector2(350, 220)
+
+[node name="pipes2" parent="." instance=ExtResource("7_q5oly")]
+position = Vector2(566, 276)
+
+[node name="pipes3" parent="." instance=ExtResource("7_q5oly")]
+position = Vector2(779, 130)
+
+[node name="Pipe_Resetter" parent="." instance=ExtResource("5_1viix")]
+position = Vector2(-126, -93)
+x = 546
+y1 = 130
+y2 = 280
+
+[node name="StaticBody2D" parent="." instance=ExtResource("9_lwdpj")]
+position = Vector2(10, -11)
+scale = Vector2(2.04279, 1.37295)
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_ecff1")
+
+[node name="pause_button" parent="Menu" instance=ExtResource("4_nyogn")]
+z_index = 3
+layout_mode = 0
+offset_left = 13.0
+offset_top = 18.0
+offset_bottom = 47.0
+
+[node name="GetReadyScrn" parent="Menu" instance=ExtResource("5_ed5yu")]
+layout_mode = 1
+offset_left = 52.0
+offset_top = 110.0
+offset_right = 52.0
+offset_bottom = 110.0
+
+[node name="Game_Over_Screen" parent="Menu" instance=ExtResource("6_mbe4g")]
+layout_mode = 1
+offset_left = 43.0
+offset_top = 103.0
+offset_right = 43.0
+offset_bottom = 103.0
+
+[node name="Score" type="Label" parent="Menu"]
+top_level = true
+z_index = 3
+layout_mode = 0
+offset_left = 56.0
+offset_top = 22.0
+offset_right = 146.0
+offset_bottom = 38.0
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("10_xgqio")
+text = "0
+"
+horizontal_alignment = 1
+
+[node name="Base" parent="." instance=ExtResource("2_deonk")]
+position = Vector2(148, 484)
+
+[node name="Base2" parent="." instance=ExtResource("2_deonk")]
+position = Vector2(484, 484)
+
+[node name="Base_Resetter" parent="." instance=ExtResource("12_1fmfe")]
+position = Vector2(-362, 400)
+x = 484
+y = 484
+
+[node name="Death_Flash" parent="." instance=ExtResource("13_0fd3l")]
+
+[editable path="Death_Flash"]

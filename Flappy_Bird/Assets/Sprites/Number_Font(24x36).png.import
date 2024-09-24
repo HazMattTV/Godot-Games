@@ -1,0 +1,22 @@
+[remap]
+
+importer="font_data_image"
+type="FontFile"
+uid="uid://ulff638hxxc4"
+path="res://.godot/imported/Number_Font(24x36).png-93aa88fc7728e6963119d2b6e95b2a62.fontdata"
+
+[deps]
+
+source_file="res://Assets/Sprites/Number_Font(24x36).png"
+dest_files=["res://.godot/imported/Number_Font(24x36).png-93aa88fc7728e6963119d2b6e95b2a62.fontdata"]
+
+[params]
+
+character_ranges=PackedStringArray("\'0\'-\'9\'")
+columns=10
+rows=1
+image_margin=Rect2i(0, 0, 0, 0)
+character_margin=Rect2i(0, 0, 0, 0)
+fallbacks=[]
+compress=true
+scaling_mode=2

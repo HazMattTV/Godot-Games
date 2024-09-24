@@ -1,0 +1,183 @@
+[gd_scene load_steps=17 format=3 uid="uid://bsvalcbvtt48c"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_4ej4t"]
+[ext_resource type="Texture2D" uid="uid://dxebgopbkr7df" path="res://Assets/Sprites/Bird (34x24).png" id="2_06pr7"]
+[ext_resource type="AudioStream" uid="uid://b7ojienu1tqoh" path="res://Assets/Sounds/SFX/wing.ogg" id="3_mclmi"]
+[ext_resource type="Texture2D" uid="uid://bvdofw0rx2wig" path="res://Assets/Sprites/Player_Death.png" id="4_60t57"]
+[ext_resource type="AudioStream" uid="uid://burg15dhjforj" path="res://Assets/Sounds/SFX/hit.ogg" id="4_343nc"]
+[ext_resource type="AudioStream" uid="uid://d3v5415pkmd5k" path="res://Assets/Sounds/SFX/die.ogg" id="5_6mfc0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_488ng"]
+atlas = ExtResource("2_06pr7")
+region = Rect2(0, 0, 34, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mde8q"]
+atlas = ExtResource("2_06pr7")
+region = Rect2(34, 0, 34, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cg22"]
+atlas = ExtResource("2_06pr7")
+region = Rect2(68, 0, 34, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_owbqe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_488ng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mde8q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0cg22")
+}],
+"loop": true,
+"name": &"Flap",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3wun2"]
+size = Vector2(26, 18)
+
+[sub_resource type="Animation" id="Animation_mpn5d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 5)]
+}
+
+[sub_resource type="Animation" id="Animation_4magd"]
+resource_name = "flap"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_0nyh4"]
+resource_name = "flying_anim"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(0.574349, 1.41421),
+"update": 0,
+"values": [Vector2(0, 5), Vector2(0, -5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_du3hh"]
+_data = {
+"RESET": SubResource("Animation_mpn5d"),
+"flap": SubResource("Animation_4magd"),
+"flying_anim": SubResource("Animation_0nyh4")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kjfd8"]
+size = Vector2(28, 20)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 2
+position = Vector2(0, -5)
+collision_mask = 2
+script = ExtResource("1_4ej4t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_owbqe")
+animation = &"Flap"
+frame = 1
+offset = Vector2(0, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_3wun2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_du3hh")
+}
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="Flap" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("3_mclmi")
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("4_343nc")
+
+[node name="Death" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("5_6mfc0")
+
+[node name="death_particle" type="CPUParticles2D" parent="."]
+z_index = 1
+emitting = false
+amount = 1
+lifetime = 3.0
+one_shot = true
+texture = ExtResource("4_60t57")
+direction = Vector2(1, -1)
+spread = 40.0
+gravity = Vector2(0, 560)
+initial_velocity_min = 25.0
+initial_velocity_max = 25.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+radial_accel_min = -40.0
+radial_accel_max = 40.0
+angle_min = -20.0
+angle_max = 20.0
+
+[node name="Collision_Detect" type="Area2D" parent="."]
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision_Detect"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_kjfd8")
+debug_color = Color(0.993915, 0, 0.230347, 0.42)
+
+[connection signal="body_entered" from="Collision_Detect" to="." method="_on_collision_detect_body_entered"]

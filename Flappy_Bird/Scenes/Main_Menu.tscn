@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://ceue0o777xceb"]
+
+[ext_resource type="Texture2D" uid="uid://c4u1thrq26ilv" path="res://Assets/Sprites/Backgrounds (288x512).png" id="1_y0kfd"]
+[ext_resource type="PackedScene" uid="uid://b04l0ip8ycegy" path="res://Objects/base.tscn" id="2_cnypu"]
+[ext_resource type="PackedScene" uid="uid://cawxojjcergpu" path="res://Objects/main_menu.tscn" id="3_b68w6"]
+[ext_resource type="PackedScene" uid="uid://sfomgvhaoavd" path="res://Objects/base_resetter.tscn" id="4_37y5w"]
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(148, 257.5)
+scale = Vector2(1.02778, 1.00586)
+texture = ExtResource("1_y0kfd")
+region_enabled = true
+region_rect = Rect2(0, 0, 288, 512)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(149, 259.512)
+scale = Vector2(1.02778, 1.00586)
+zoom = Vector2(2, 2)
+
+[node name="Base" parent="." instance=ExtResource("2_cnypu")]
+position = Vector2(148, 484)
+
+[node name="Base2" parent="." instance=ExtResource("2_cnypu")]
+position = Vector2(484, 484)
+
+[node name="Base_Resetter" parent="." instance=ExtResource("4_37y5w")]
+position = Vector2(-362, 400)
+x = 484
+y = 484
+
+[node name="Main_Menu" parent="." instance=ExtResource("3_b68w6")]
+offset_left = 36.0
+offset_top = 71.0
+offset_right = 36.0
+offset_bottom = 71.0

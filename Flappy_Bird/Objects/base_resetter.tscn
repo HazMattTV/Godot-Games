@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://sfomgvhaoavd"]
+
+[ext_resource type="Script" path="res://Scripts/base_resetter.gd" id="1_u64bf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7g20"]
+size = Vector2(20, 195)
+
+[node name="Base_Resetter" type="Area2D" groups=["resetter"]]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_u64bf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 87.5)
+shape = SubResource("RectangleShape2D_h7g20")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

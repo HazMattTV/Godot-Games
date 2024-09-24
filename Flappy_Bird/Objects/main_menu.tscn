@@ -1,0 +1,79 @@
+[gd_scene load_steps=8 format=3 uid="uid://cawxojjcergpu"]
+
+[ext_resource type="Script" path="res://Scripts/main_menu_anim.gd" id="1_b3oy0"]
+[ext_resource type="Texture2D" uid="uid://0k4eluoq3ns4" path="res://Assets/Sprites/Title.png" id="1_elhjr"]
+[ext_resource type="Texture2D" uid="uid://b5j7liwr5t48l" path="res://Assets/Sprites/button_play_normal.png" id="2_pwcvf"]
+[ext_resource type="Script" path="res://Scripts/UI/Play.gd" id="3_xksiw"]
+
+[sub_resource type="Animation" id="Animation_bm4yx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 5)]
+}
+
+[sub_resource type="Animation" id="Animation_e76jw"]
+resource_name = "root"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 5), Vector2(0, -5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qfxe6"]
+_data = {
+"RESET": SubResource("Animation_bm4yx"),
+"root": SubResource("Animation_e76jw")
+}
+
+[node name="Main_Menu" type="Control"]
+top_level = true
+z_index = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b3oy0")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = 5.0
+offset_right = 230.0
+offset_bottom = 66.9997
+texture = ExtResource("1_elhjr")
+stretch_mode = 4
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 249.0
+offset_right = 153.0
+offset_bottom = 297.0
+texture_normal = ExtResource("2_pwcvf")
+stretch_mode = 4
+script = ExtResource("3_xksiw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qfxe6")
+}
+
+[connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_pressed"]
