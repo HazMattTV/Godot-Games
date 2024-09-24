@@ -1,0 +1,94 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj2d7ief88b0n"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_hxsrk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fxd5"]
+size = Vector2(40, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4dgv"]
+size = Vector2(40, 40)
+
+[node name="player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 11
+script = ExtResource("1_hxsrk")
+
+[node name="Body" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Arm1" type="ColorRect" parent="Body"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.275
+anchor_right = 0.275
+offset_left = 16.0
+offset_top = 40.0
+offset_right = 55.0
+offset_bottom = 51.0
+rotation = -0.0698132
+scale = Vector2(1.00562, 0.982893)
+metadata/_edit_use_anchors_ = true
+
+[node name="Gun" type="ColorRect" parent="Body/Arm1"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 2.0
+offset_right = 54.0
+offset_bottom = 9.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ShootPos" type="Node2D" parent="Body/Arm1/Gun"]
+position = Vector2(24, 4)
+rotation = 1.5708
+
+[node name="Arm2" type="ColorRect" parent="Body"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = -11.0
+offset_right = 25.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Life_Amount" type="Label" parent="." groups=["player"]]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = -54.0
+offset_right = 20.0
+offset_bottom = -31.0
+grow_horizontal = 2
+text = "LIVES"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7fxd5")
+
+[node name="BulletDetect" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletDetect"]
+shape = SubResource("RectangleShape2D_y4dgv")
+debug_color = Color(0.948566, 0.640922, 0.091708, 0.42)
+
+[node name="Glasses" type="ColorRect" parent="."]
+offset_left = 20.0
+offset_top = -17.0
+offset_right = 25.0
+offset_bottom = 18.0
+color = Color(0, 0, 0, 1)
+
+[connection signal="body_entered" from="BulletDetect" to="." method="_on_bullet_detect_body_entered"]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2rglpalq04aw"]
+
+[ext_resource type="PackedScene" uid="uid://dj2d7ief88b0n" path="res://Objects/player.tscn" id="1_vr66n"]
+[ext_resource type="PackedScene" uid="uid://b0pxcwicgt62l" path="res://Objects/npc.tscn" id="3_kqkj3"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource("1_vr66n")]
+position = Vector2(-220, 21)
+max_lives = 10
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+
+[node name="NPC_handler" type="Node2D" parent="."]
+
+[node name="NPC7" parent="NPC_handler" node_paths=PackedStringArray("player") instance=ExtResource("3_kqkj3")]
+position = Vector2(138, -8)
+rotation = 2.09963
+max_lives = 3
+player = NodePath("../../player")

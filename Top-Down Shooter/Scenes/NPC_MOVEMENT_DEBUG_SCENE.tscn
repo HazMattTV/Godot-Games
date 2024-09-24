@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://45wy6a3b685n"]
+
+[ext_resource type="PackedScene" uid="uid://dj2d7ief88b0n" path="res://Objects/player.tscn" id="1_od0ng"]
+[ext_resource type="PackedScene" uid="uid://b0pxcwicgt62l" path="res://Objects/npc.tscn" id="2_rxlju"]
+
+[node name="NpcMovementDebugScene" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource("1_od0ng")]
+position = Vector2(292, 66)
+
+[node name="NPC" parent="." instance=ExtResource("2_rxlju")]
+position = Vector2(585, 39)
+killable = false

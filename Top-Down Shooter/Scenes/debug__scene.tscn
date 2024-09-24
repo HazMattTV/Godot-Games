@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2lts0qgq575i"]
+
+[ext_resource type="PackedScene" uid="uid://dj2d7ief88b0n" path="res://Objects/player.tscn" id="1_qufel"]
+[ext_resource type="PackedScene" uid="uid://b275ltjvqge4i" path="res://Objects/wall.tscn" id="2_8jexu"]
+[ext_resource type="PackedScene" uid="uid://b0pxcwicgt62l" path="res://Objects/npc.tscn" id="3_bf6ad"]
+[ext_resource type="PackedScene" uid="uid://ckihme4c68ahj" path="res://Objects/player_dummy.tscn" id="4_hocm2"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource("1_qufel")]
+position = Vector2(-220, 21)
+max_lives = 10
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+
+[node name="wall" parent="." instance=ExtResource("2_8jexu")]
+position = Vector2(374, 4)
+scale = Vector2(1.32371, 15.2763)
+
+[node name="wall2" parent="." instance=ExtResource("2_8jexu")]
+position = Vector2(-825, 4)
+scale = Vector2(1.32371, 15.2763)
+
+[node name="NPC_handler" type="Node2D" parent="."]
+
+[node name="NPC3" parent="NPC_handler" node_paths=PackedStringArray("player") instance=ExtResource("3_bf6ad")]
+position = Vector2(-157, -131)
+max_lives = 3
+isStatic = true
+player = NodePath("../../player_dummy")
+
+[node name="NPC" parent="NPC_handler" node_paths=PackedStringArray("player") instance=ExtResource("3_bf6ad")]
+position = Vector2(-516, 75)
+rotation = 2.09963
+max_lives = 3
+friendly = false
+isStatic = true
+player = NodePath("../../player")
+
+[node name="NPC7" parent="NPC_handler" node_paths=PackedStringArray("player") instance=ExtResource("3_bf6ad")]
+position = Vector2(1073, -131)
+rotation = 2.09963
+max_lives = 3
+player = NodePath("../../player")
+
+[node name="NPC2" parent="NPC_handler" node_paths=PackedStringArray("player") instance=ExtResource("3_bf6ad")]
+position = Vector2(-1370, -125)
+rotation = 3.14159
+max_lives = 3
+friendly = false
+isStatic = true
+player = NodePath("../../player")
+
+[node name="NPC4" parent="NPC_handler" node_paths=PackedStringArray("player") instance=ExtResource("3_bf6ad")]
+position = Vector2(-1372, -27)
+rotation = 3.14159
+max_lives = 3
+friendly = false
+isStatic = true
+player = NodePath("../../player")
+
+[node name="NPC5" parent="NPC_handler" node_paths=PackedStringArray("player") instance=ExtResource("3_bf6ad")]
+position = Vector2(-1374, 76)
+rotation = 3.14159
+max_lives = 3
+friendly = false
+isStatic = true
+player = NodePath("../../player")
+
+[node name="NPC6" parent="NPC_handler" node_paths=PackedStringArray("player") instance=ExtResource("3_bf6ad")]
+position = Vector2(-1379, 177)
+rotation = 3.14159
+max_lives = 3
+friendly = false
+isStatic = true
+player = NodePath("../../player")
+
+[node name="player_dummy" parent="." instance=ExtResource("4_hocm2")]
+position = Vector2(226, -92)
